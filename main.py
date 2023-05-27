@@ -8,7 +8,7 @@ import asyncio
 import urllib.parse
 from replit import db
 from discord.ext import commands
-
+from keepAlive import keep_alive
 #This was created by user BruSal.
 #Find him in BruSalSprouts on GitHub!
 
@@ -120,6 +120,10 @@ async def admin_help(ctx):
     await ctx.send("Type in !remove_item_from_menu to remove an item from the menu, you'll be prompted to enter the name of the item you want to remove, and it will be removed from the menu. [NOTE: When the bot shuts down, the menu will revert to default menu options]")
     await ctx.send("Type in !shutdown to shut down the bot [NOTE: All menu items will revert back to default stats, and all customers' orders that they can see (and clear) in !bill will be lost]")
 
+# @bot.command()
+# async def help(ctx): #little message to ask the waitress for help
+#     await ctx.send("Try asking the waitress for help. Type in '!waitress'")
+
 @bot.command()
 async def waitress(ctx):  #The café's greeting message essentailly
     if ctx.channel.id != targetChannelID:  #Checks to see if the command is being called in the correct channel ID
@@ -162,7 +166,7 @@ async def open(ctx):  #Opens the café and changes isOpen to True. Only mods can
     await ctx.send(file=file)
 
     await ctx.send('The café is now open!')  #Finishing message
-
+    await ctx.send("Type in !waitress to learn what you can do in the cafe!")
 
 @bot.command()
 async def close(ctx):  #Closes the café and changes isOpen to false. Only mods can do this
@@ -512,5 +516,6 @@ async def on_disconnect():
     # print("Uploaded and saved all userIDs' lists to replit database")
     print('Bot is now shutting down gracefully.')
 
+keep_alive() #This command runs the web server
 tracemalloc.start()
 bot.run(mySecret)
