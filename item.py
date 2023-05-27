@@ -9,7 +9,7 @@ class item:
         self.picturePath = picturePath
 
     #Getter and Setter for name
-    def getname(self):
+    def getName(self):
         return self.name
     def setNewName(self, newName):
         self.name = newName
@@ -25,3 +25,10 @@ class item:
         return self.picturePath
     def setPicturePath(self, newPath):
         self.picturePath = newPath
+
+    def search_by_name(nameTarget, menu): #Finds an item by it's name (Not case sensitive) and returns it
+        nameTarget = nameTarget.lower()
+        for obj in menu:
+            if obj.getName().lower() == nameTarget:
+                return obj
+        return False
